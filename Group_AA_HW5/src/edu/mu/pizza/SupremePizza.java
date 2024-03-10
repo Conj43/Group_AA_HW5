@@ -8,9 +8,9 @@ public class SupremePizza extends AbstractPizza {
 
     public SupremePizza() {
         super();
-        this.priceWithoutToppings = 3.50; // Set default price for SupremePizza
-        this.toppingList = new ArrayList<>(); // Initialize the toppings list
-        // Add default toppings specific to SupremePizza
+        this.priceWithoutToppings = 3.50; //set default price for SupremePizza
+        this.toppingList = new ArrayList<>(); //initialize the toppings list
+        //add default toppings specific to SupremePizza
         toppingList.add(Toppings.TOMATO);
         toppingList.add(Toppings.CHEESE);
         toppingList.add(Toppings.BELL_PEPPER);
@@ -18,7 +18,7 @@ public class SupremePizza extends AbstractPizza {
         toppingList.add(Toppings.PEPPERONI);
         toppingList.add(Toppings.BLACK_OLIVE);
         toppingList.add(Toppings.MUSHROOM);
-        updatePizzaPrice(); // Initial total price calculation
+        updatePizzaPrice(); //initial total price calculation
     }
 
     public SupremePizza(List<Toppings> toppingList, double priceWithoutToppings, double totalPrice, int pizzaOrderID,
