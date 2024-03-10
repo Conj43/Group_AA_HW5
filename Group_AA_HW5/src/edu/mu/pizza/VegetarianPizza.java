@@ -1,58 +1,53 @@
 package edu.mu.pizza;
 
-import java.util.List;
-
+import java.util.ArrayList;
 import edu.mu.Toppings;
 import edu.mu.cooking.ICookingStrategy;
 
-public class VegetarianPizza extends AbstractPizza{
+public class VegetarianPizza extends AbstractPizza {
 
-		//default constructor
-			public VegetarianPizza() {
-			}
+    public VegetarianPizza() {
+        super();
+        this.priceWithoutToppings = 1.50; //set default price for VegetarianPizza
+        this.toppingList = new ArrayList<>(); //initialize the toppings list
+        //add default toppings specific to VegetarianPizza
+        toppingList.add(Toppings.TOMATO);
+        toppingList.add(Toppings.CHEESE);
+        toppingList.add(Toppings.BELL_PEPPER);
+        toppingList.add(Toppings.BLACK_OLIVE);
+        toppingList.add(Toppings.MUSHROOM);
+        updatePizzaPrice(); //initial total price calculation
+    }
 
-			
-			//super constructor
-			public VegetarianPizza(List<Toppings> toppingList, double priceWithoutToppings, double totalPrice, int pizzaOrderID,
-					ICookingStrategy cookingStrategy, double cookingPrice) {
-				super(toppingList, priceWithoutToppings, totalPrice, pizzaOrderID, cookingStrategy, cookingPrice);
-			}
-			
-			//copy constructor
-			public VegetarianPizza(HawaiianPizza vPizza) {
-				this.toppingList = vPizza.toppingList;
-				this.priceWithoutToppings = vPizza.priceWithoutToppings;
-				this.totalPrice = vPizza.totalPrice;
-				this.pizzaOrderID = vPizza.pizzaOrderID;
-				this.cookingStrategy = vPizza.cookingStrategy;
-				this.cookingPrice = vPizza.cookingPrice;
-			}
-			
-			
-			//generated toString method
-			@Override
-			public String toString() {
-				return "VegetarianPizza [toppingList=" + toppingList + ", priceWithoutToppings=" + priceWithoutToppings
-						+ ", totalPrice=" + totalPrice + ", pizzaOrderID=" + pizzaOrderID + ", cookingStrategy="
-						+ cookingStrategy + ", cookingPrice=" + cookingPrice + "]";
-			}
+    public VegetarianPizza(List<Toppings> toppingList, double priceWithoutToppings, double totalPrice, int pizzaOrderID,
+                           ICookingStrategy cookingStrategy, double cookingPrice) {
+        super(toppingList, priceWithoutToppings, totalPrice, pizzaOrderID, cookingStrategy, cookingPrice);
+    }
 
+    public VegetarianPizza(VegetarianPizza vPizza) {
+        super(new ArrayList<>(vPizza.toppingList), vPizza.priceWithoutToppings, vPizza.totalPrice, 
+              vPizza.pizzaOrderID, vPizza.cookingStrategy, vPizza.cookingPrice);
+    }
 
-			@Override
-			protected double addTopingsToPrice(double priceWithoutToppings) {
+    @Override
+    protected double addTopingsToPrice(double priceWithoutToppings) {
+        double toppingsPrice = toppingList.stream().mapToDouble(Toppings::getPrice).sum();
+        return priceWithoutToppings + toppingsPrice;
+    }
 
-				return 0;
-			}
+    @Override
+    public double updatePizzaPrice() {
+        this.totalPrice = addTopingsToPrice(this.priceWithoutToppings);
+        return this.totalPrice;
+    }
 
-
-			
-
-
-			@Override
-			public double updatePizzaPrice() {
-
-				return 0;
-			}
-			
-
+    @Override
+    public String toString() {
+        return "VegetarianPizza {" +
+                "toppingList=" + toppingList +
+                ", priceWithoutToppings=" + priceWithoutToppings +
+                ", totalPrice=" + totalPrice +
+                ", pizzaOrderID=" + pizzaOrderID +
+                ", cookingStrategy=" + cookingStrategy
+    }
 }
