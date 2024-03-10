@@ -1,58 +1,61 @@
 package edu.mu.pizza;
 
-
-import java.util.List;
-
+import java.util.ArrayList;
 import edu.mu.Toppings;
 import edu.mu.cooking.ICookingStrategy;
 
-public class HawaiianPizza extends AbstractPizza{
+public class HawaiianPizza extends AbstractPizza {
 
-	//default constructor
-	public HawaiianPizza() {
-	}
+    //default constructor initializes with default toppings
+    public HawaiianPizza() {
+        super();
+        this.priceWithoutToppings = 3.00; //set default price for HawaiianPizza
+        this.toppingList = new ArrayList<>(); //initialize the toppings list
+        //adds default toppings specific to HawaiianPizza
+        toppingList.add(Toppings.CANADIAN_BACON);
+        toppingList.add(Toppings.CHEESE);
+        toppingList.add(Toppings.PINEAPPLE);
+        //this calculates the initial total price including toppings
+        updatePizzaPrice();
+    }
 
-	
-	//super constructor
-	public HawaiianPizza(List<Toppings> toppingList, double priceWithoutToppings, double totalPrice, int pizzaOrderID,
-			ICookingStrategy cookingStrategy, double cookingPrice) {
-		super(toppingList, priceWithoutToppings, totalPrice, pizzaOrderID, cookingStrategy, cookingPrice);
-	}
-	
-	//copy constructor
-	public HawaiianPizza(HawaiianPizza hPizza) {
-		this.toppingList = hPizza.toppingList;
-		this.priceWithoutToppings = hPizza.priceWithoutToppings;
-		this.totalPrice = hPizza.totalPrice;
-		this.pizzaOrderID = hPizza.pizzaOrderID;
-		this.cookingStrategy = hPizza.cookingStrategy;
-		this.cookingPrice = hPizza.cookingPrice;
-	}
-	
-	
-	//generated toString method
-	@Override
-	public String toString() {
-		return "HawaiianPizza [toppingList=" + toppingList + ", priceWithoutToppings=" + priceWithoutToppings
-				+ ", totalPrice=" + totalPrice + ", pizzaOrderID=" + pizzaOrderID + ", cookingStrategy="
-				+ cookingStrategy + ", cookingPrice=" + cookingPrice + "]";
-	}
+    //parameterized constructor for custom orders
+    public HawaiianPizza(List<Toppings> toppingList, double priceWithoutToppings, double totalPrice, int pizzaOrderID,
+                         ICookingStrategy cookingStrategy, double cookingPrice) {
+        super(toppingList, priceWithoutToppings, totalPrice, pizzaOrderID, cookingStrategy, cookingPrice);
+    }
 
+    //copy constructor creates a deep copy of HawaiianPizza
+    public HawaiianPizza(HawaiianPizza hPizza) {
+        super(new ArrayList<>(hPizza.toppingList), hPizza.priceWithoutToppings, hPizza.totalPrice, 
+              hPizza.pizzaOrderID, hPizza.cookingStrategy, hPizza.cookingPrice);
+    }
+    
+    @Override
+    protected double addTopingsToPrice(double priceWithoutToppings) {
+        double toppingsPrice = 0;
+        for (Toppings topping : toppingList) {
+            toppingsPrice += topping.getPrice(); 
+        }
+        return priceWithoutToppings + toppingsPrice;
+    }
 
-	@Override
-	protected double addTopingsToPrice(double priceWithoutToppings) {
+    @Override
+    public double updatePizzaPrice() {
+        this.totalPrice = addTopingsToPrice(this.priceWithoutToppings);
+        return this.totalPrice;
+    }
 
-		return 0;
-	}
-
-
-	@Override
-	public double updatePizzaPrice() {
-
-		return 0;
-	}
-	
-	
-
+    @Override
+    public String toString() {
+        return "HawaiianPizza {" +
+                "toppingList=" + toppingList +
+                ", priceWithoutToppings=" + priceWithoutToppings +
+                ", totalPrice=" + totalPrice +
+                ", pizzaOrderID=" + pizzaOrderID +
+                ", cookingStrategy=" + cookingStrategy +
+                ", cookingPrice=" + cookingPrice +
+                '}';
+    }
 }
-//
+
