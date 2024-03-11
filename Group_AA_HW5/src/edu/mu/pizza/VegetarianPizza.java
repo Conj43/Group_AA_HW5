@@ -1,6 +1,8 @@
 package edu.mu.pizza;
 
 import java.util.ArrayList;
+import java.util.List;
+
 import edu.mu.Toppings;
 import edu.mu.cooking.ICookingStrategy;
 
@@ -31,8 +33,11 @@ public class VegetarianPizza extends AbstractPizza {
 
     @Override
     protected double addTopingsToPrice(double priceWithoutToppings) {
-        double toppingsPrice = toppingList.stream().mapToDouble(Toppings::getPrice).sum();
-        return priceWithoutToppings + toppingsPrice;
+    	 double toppingsPrice = 0;
+         for (Toppings topping : toppingList) {
+             toppingsPrice += topping.getToppingPrice(); 
+         }
+         return priceWithoutToppings + toppingsPrice;
     }
 
     @Override
@@ -48,6 +53,6 @@ public class VegetarianPizza extends AbstractPizza {
                 ", priceWithoutToppings=" + priceWithoutToppings +
                 ", totalPrice=" + totalPrice +
                 ", pizzaOrderID=" + pizzaOrderID +
-                ", cookingStrategy=" + cookingStrategy
+                ", cookingStrategy=" + cookingStrategy;
     }
 }
