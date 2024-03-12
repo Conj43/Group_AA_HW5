@@ -100,7 +100,6 @@ public abstract class AbstractPizza {
 	}
 	
 	public void removeTopping(Toppings topping) {
-	    // Assuming there's a List<Toppings> to hold the toppings
 	    this.toppingList.remove(topping);
 	}
 	
