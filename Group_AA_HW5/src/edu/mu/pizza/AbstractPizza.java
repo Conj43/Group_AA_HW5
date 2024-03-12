@@ -91,6 +91,24 @@ public abstract class AbstractPizza {
                 ", cookingPrice=" + cookingPrice +
                 '}';
     }
+	
+
+	
+	
+	
+	 
+	
+	
+	
+	
+	@Override
+	public String toString() {
+		return "AbstractPizza [toppingList=" + toppingList + ", priceWithoutToppings=" + priceWithoutToppings
+				+ ", totalPrice=" + totalPrice + ", pizzaOrderID=" + pizzaOrderID + ", cookingStrategy="
+				+ cookingStrategy + ", cookingPrice=" + cookingPrice + "]";
+	}
+
+
+
 }
 
-//
