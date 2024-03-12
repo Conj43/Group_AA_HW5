@@ -22,19 +22,20 @@ public class HawaiianPizza extends AbstractPizza {
     }
 
     //parameterized constructor for custom orders
-    public HawaiianPizza(List<Toppings> toppingList, double priceWithoutToppings, double totalPrice, int pizzaOrderID,
+    public HawaiianPizza(List<Toppings> toppingList, double priceWithoutToppings, double totalPrice, 
                          ICookingStrategy cookingStrategy, double cookingPrice) {
-        super(toppingList, priceWithoutToppings, totalPrice, pizzaOrderID, cookingStrategy, cookingPrice);
+        super(toppingList, priceWithoutToppings, totalPrice, cookingStrategy, cookingPrice);
     }
 
     //copy constructor creates a deep copy of HawaiianPizza
     public HawaiianPizza(HawaiianPizza hPizza) {
         super(new ArrayList<>(hPizza.toppingList), hPizza.priceWithoutToppings, hPizza.totalPrice, 
-              hPizza.pizzaOrderID, hPizza.cookingStrategy, hPizza.cookingPrice);
+              hPizza.cookingStrategy, hPizza.cookingPrice);
+        
     }
     
     @Override
-    protected double addTopingsToPrice(double priceWithoutToppings) {
+    protected double addToppingsToPrice(double priceWithoutToppings) { //adds total price of toppings to total price of pizza
         double toppingsPrice = 0;
         for (Toppings topping : toppingList) {
             toppingsPrice += topping.getToppingPrice(); 
@@ -43,8 +44,9 @@ public class HawaiianPizza extends AbstractPizza {
     }
 
     @Override
-    public double updatePizzaPrice() {
-        this.totalPrice = addTopingsToPrice(this.priceWithoutToppings);
+    public double updatePizzaPrice() { //updates total price including toppings and cooking style
+        this.totalPrice = addToppingsToPrice(this.priceWithoutToppings);
+        this.totalPrice += this.cookingPrice;
         return this.totalPrice;
     }
 

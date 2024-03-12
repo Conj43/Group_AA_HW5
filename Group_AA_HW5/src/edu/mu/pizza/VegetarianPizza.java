@@ -21,18 +21,18 @@ public class VegetarianPizza extends AbstractPizza {
         updatePizzaPrice(); //initial total price calculation
     }
 
-    public VegetarianPizza(List<Toppings> toppingList, double priceWithoutToppings, double totalPrice, int pizzaOrderID,
+    public VegetarianPizza(List<Toppings> toppingList, double priceWithoutToppings, double totalPrice,
                            ICookingStrategy cookingStrategy, double cookingPrice) {
-        super(toppingList, priceWithoutToppings, totalPrice, pizzaOrderID, cookingStrategy, cookingPrice);
+        super(toppingList, priceWithoutToppings, totalPrice,  cookingStrategy, cookingPrice);
     }
 
     public VegetarianPizza(VegetarianPizza vPizza) {
         super(new ArrayList<>(vPizza.toppingList), vPizza.priceWithoutToppings, vPizza.totalPrice, 
-              vPizza.pizzaOrderID, vPizza.cookingStrategy, vPizza.cookingPrice);
+               vPizza.cookingStrategy, vPizza.cookingPrice);
     }
 
     @Override
-    protected double addTopingsToPrice(double priceWithoutToppings) {
+    protected double addToppingsToPrice(double priceWithoutToppings) { //adds total price of toppings to total price of pizza
     	 double toppingsPrice = 0;
          for (Toppings topping : toppingList) {
              toppingsPrice += topping.getToppingPrice(); 
@@ -41,8 +41,9 @@ public class VegetarianPizza extends AbstractPizza {
     }
 
     @Override
-    public double updatePizzaPrice() {
-        this.totalPrice = addTopingsToPrice(this.priceWithoutToppings);
+    public double updatePizzaPrice() {  //updates total price including toppings and cooking style
+        this.totalPrice = addToppingsToPrice(this.priceWithoutToppings);
+        this.totalPrice += this.cookingPrice;
         return this.totalPrice;
     }
 

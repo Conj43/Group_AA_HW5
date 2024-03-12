@@ -17,7 +17,7 @@ public abstract class AbstractPizza {
     // Enhanced default constructor
     public AbstractPizza() {
         this.toppingList = new ArrayList<>(); //ensure toppingList is never null
-        this.pizzaOrderID = ++orderIDCounter; //increment and assign a unique order ID
+        
     }
 
     //modified parameterized constructor for custom pizza creation
@@ -31,8 +31,16 @@ public abstract class AbstractPizza {
         this.cookingPrice = cookingPrice;
     }
 
-    //abstract method for adding topping prices to base price, to be implemented by subclasses
-    protected abstract double addToppingsToPrice();
+    public void setTotalPrice(double totalPrice) {
+		this.totalPrice = totalPrice;
+	}
+
+	public void setPizzaOrderID(int pizzaOrderID) {
+		this.pizzaOrderID = pizzaOrderID;
+	}
+
+	//abstract method for adding topping prices to base price, to be implemented by subclasses
+    protected abstract double addToppingsToPrice(double priceWithoutToppings);
 
     //abstract method for updating the total pizza price, to be implemented by subclasses
     public abstract double updatePizzaPrice();
