@@ -99,6 +99,24 @@ public abstract class AbstractPizza {
 		this.cookingPrice = cookingPrice;
 	}
 	
+	public void removeTopping(Toppings topping) {
+	    // Assuming there's a List<Toppings> to hold the toppings
+	    this.toppingList.remove(topping);
+	}
+	
+	public void addTopping(Toppings topping) {
+        if (this.toppingList == null) {
+            this.toppingList = new ArrayList<>();
+        }
+        this.toppingList.add(topping);
+    }
+	
+	
+	
+	
+	 
+	
+	
 	
 	
 	@Override
