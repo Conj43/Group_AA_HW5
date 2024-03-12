@@ -1,13 +1,9 @@
-package edu.mu;
+package edu.mu.pizza;
 
-import edu.mu.pizza.AbstractPizza;
-import edu.mu.pizza.HawaiianPizza;
-import edu.mu.pizza.MargheritaPizza;
-import edu.mu.pizza.SupremePizza;
-import edu.mu.pizza.VegetarianPizza;
+import edu.mu.PizzaType;
 
 public class PizzaCookingFactory {
-	private static int orderIDCounter = 0; //makes a static order id that will keep track of all pizza ids
+	
 
 	public PizzaCookingFactory() {
 		// TODO Auto-generated constructor stub
@@ -33,7 +29,7 @@ public class PizzaCookingFactory {
 			return null; //if no pizza type was given it defaults to a null return
 		}
 		
-		pizza.setPizzaOrderID(++orderIDCounter); // sets the order id and increments it
+		pizza.setPizzaOrderID(++(AbstractPizza.orderIDCounter)); // sets the order id and increments it using static variable
 		
 		return pizza;
 		

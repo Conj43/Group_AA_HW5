@@ -12,7 +12,7 @@ public class MicrowaveCookingStrategy implements ICookingStrategy {
 	public boolean cook(AbstractPizza pizza) {
 		if(pizza != null)
 		{
-		pizza.setCookingPrice(8.0); //sets the price of the cooking to $10
+		pizza.setCookingPrice(8.0); //sets the price of the cooking to $8
 		pizza.setCookingStrategy(this); //sets the cooking strategy to the current cooking strategy
 		pizza.updatePizzaPrice(); //updates the price of the whole pizza
 	
